@@ -26,7 +26,7 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```java
+```property
 spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$ \
 spring.datasource.username=$USERNAME$ \
 spring.datasource.password=$PASSWORD$ \
@@ -71,7 +71,7 @@ public class ${NAME} {
 ```
 
 #### controller  
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #set ($index = $NAME.indexOf("Controller"))
 #set ($API= $NAME.substring(0, $index))
@@ -88,7 +88,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}.class);
 ```
 
 #### repository  
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #set ($index = $NAME.indexOf("Repository"))  #set ($index = $NAME.indexOf("Repo"))
 #set ($ENTITY= $NAME.substring(0, $index))
@@ -100,19 +100,19 @@ import org.slf4j.LoggerFactory;
 public interface ${NAME} extends JpaRepository<$ENTITY, Long> {
 private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}.class);
 }
-```
+```java
 #### ServiceImpl  
 create serviceImpl templete frist we create base templete service class and then we create there implementation calss
 
 ##### Service
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 public interface ${NAME}{
 }
-```
+```java
 select this service templete and click on create child template
 ##### ServiceImpl 
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,7 +128,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}Impl.class);
 
 #### Package Structure Template 
 create a base template as dummyclass 
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 class Dummy${NAME}{
 }
@@ -137,7 +137,7 @@ under this select child templete create below templetes \
 
 ##### Dto 
 filename: dto/${NAME}
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -157,7 +157,7 @@ public class ${NAME}DTO {
 ```
 ##### Entity 
 filename: entities/${NAME}
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
@@ -197,7 +197,7 @@ public class ${NAME} {
 ```
 ##### Service 
 filename:services/${NAME}
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import ${PACKAGE_NAME}.entities.${NAME};
 public interface ${NAME}Service{
@@ -205,7 +205,7 @@ public interface ${NAME}Service{
 ```
 ##### ServiceImpl 
 fielname:services/impl/${NAME}
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -225,7 +225,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}ServiceImpl.
 ```
 ##### Repository 
 filename: repositories/${NAME}
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -235,7 +235,7 @@ public interface ${NAME}Repository extends JpaRepository<${NAME}, Long> {
 ```
 ##### Controller 
 filename: controller/${NAME}
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -264,7 +264,7 @@ it is same as above **Package Structure templete** here we cover basic curd oper
 --> deleteAll
 
 ##### Dto
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -282,7 +282,7 @@ public class ${NAME}DTO {
 }
 ```
 ##### Entity
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
@@ -319,7 +319,7 @@ public class ${NAME} {
 }
 ```
 ##### Repository
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -329,7 +329,7 @@ public interface ${NAME}Repository extends JpaRepository<${NAME}, Long> {
 }
 ```
 ##### Service
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -348,7 +348,7 @@ public interface ${NAME}Service{
 }
 ```
 ##### ServiceImpl
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -367,7 +367,7 @@ public interface ${NAME}Service{
 }
 ```
 ##### Controller
-```
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
