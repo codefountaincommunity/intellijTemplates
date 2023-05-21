@@ -26,13 +26,13 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```spring
-spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$ \
-spring.datasource.username=$USERNAME$ \
-spring.datasource.password=$PASSWORD$ \
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver \
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect \
-spring.jpa.hibernate.ddl-auto=update \ 
+```spring java properties
+spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$
+spring.datasource.username=$USERNAME$
+spring.datasource.password=$PASSWORD$
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=update 
 
 ```
 
