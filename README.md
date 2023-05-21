@@ -14,7 +14,7 @@ template text box past the below template \
 click on editvariable expression field select **className()**
 below template text select **define** expand java select **declaration** 
 
-```
+```java
 private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger($NAME$.class);
 
 ```
@@ -26,7 +26,7 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```
+```java
 spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$ \
 spring.datasource.username=$USERNAME$ \
 spring.datasource.password=$PASSWORD$ \
@@ -41,8 +41,8 @@ spring.jpa.hibernate.ddl-auto=update \
 Intellijidea goto settings -> File and Code Templates --> under files->click on + icon \
 file name ***Entity~~(CodeFountain)~~*** extension java \
 
-#### Entity  \
-```
+#### Entity  
+```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
@@ -70,7 +70,7 @@ public class ${NAME} {
 
 ```
 
-#### controller  \
+#### controller  
 ```
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #set ($index = $NAME.indexOf("Controller"))
@@ -87,7 +87,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}.class);
 }
 ```
 
-#### repository  \
+#### repository  
 ```
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #set ($index = $NAME.indexOf("Repository"))  #set ($index = $NAME.indexOf("Repo"))
@@ -101,7 +101,7 @@ public interface ${NAME} extends JpaRepository<$ENTITY, Long> {
 private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}.class);
 }
 ```
-#### ServiceImpl  \
+#### ServiceImpl  
 create serviceImpl templete frist we create base templete service class and then we create there implementation calss
 
 ##### Service
@@ -126,7 +126,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}Impl.class);
 }
 ```
 
-#### Package Structure Template \
+#### Package Structure Template 
 create a base template as dummyclass 
 ```
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
