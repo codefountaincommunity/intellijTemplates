@@ -26,7 +26,7 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```TypeScript
+```JavaScript
 spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$
 spring.datasource.username=$USERNAME$
 spring.datasource.password=$PASSWORD$
