@@ -26,7 +26,7 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```property
+```spring
 spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$ \
 spring.datasource.username=$USERNAME$ \
 spring.datasource.password=$PASSWORD$ \
@@ -39,7 +39,7 @@ spring.jpa.hibernate.ddl-auto=update \
 ## File and code Template:
 **note:**  ***this file templates designed based on springboot version 3.0 if you are using springboot version below 3.0 you need to change the import statments all jakarta packages to javax package***
 Intellijidea goto settings -> File and Code Templates --> under files->click on + icon \
-file name ***Entity~~(CodeFountain)~~*** extension java \
+file name ***Entity*** extension java
 
 #### Entity  
 ```java
@@ -100,7 +100,7 @@ import org.slf4j.LoggerFactory;
 public interface ${NAME} extends JpaRepository<$ENTITY, Long> {
 private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}.class);
 }
-```java
+```
 #### ServiceImpl  
 create serviceImpl templete frist we create base templete service class and then we create there implementation calss
 
@@ -109,7 +109,7 @@ create serviceImpl templete frist we create base templete service class and then
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 public interface ${NAME}{
 }
-```java
+```
 select this service templete and click on create child template
 ##### ServiceImpl 
 ```java
@@ -133,7 +133,7 @@ create a base template as dummyclass
 class Dummy${NAME}{
 }
 ```
-under this select child templete create below templetes \
+under this select child templete create below templetes
 
 ##### Dto 
 filename: dto/${NAME}
