@@ -14,9 +14,11 @@ Intellijidea goto settings -> Live Templates --> right hand side click **+** but
 abbravitation box write looger \
 template text box past the below template \
 click on editvariable expression field select **className()**
-below template text select **define** expand java select **declaration** \
+below template text select **define** expand java select **declaration** 
 
-```private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger($NAME$.class);
+```
+private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger($NAME$.class);
+
 ```
 ##### MySql:
 Intellijidea goto settings -> Live Templates --> right hand side click **+** button select live template
