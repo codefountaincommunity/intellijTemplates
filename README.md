@@ -350,20 +350,68 @@ public interface ${NAME}Service{
 ##### ServiceImpl
 ```java
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 import ${PACKAGE_NAME}.entities.${NAME};
 import ${PACKAGE_NAME}.dto.${NAME}DTO;
-import java.util.List;
-public interface ${NAME}Service{
-  public ${NAME} create${NAME}(${NAME}DTO ${NAME.toLowerCase()}DTO);
-    public ${NAME} update${NAME}(Long id, ${NAME}DTO ${NAME.toLowerCase()}DTO);
-    public ${NAME} get${NAME}ById(Long id);  
-    public List<${NAME}> getAll${NAME}s();
-    public Page<${NAME}> getAll${NAME}s(Pageable pageable);
-    public void delete${NAME}(Long id);
-    public void deleteAll${NAME}s(); 
+import ${PACKAGE_NAME}.services.${NAME}Service;
+import ${PACKAGE_NAME}.repositories.${NAME}Repository;
 
+@Service
+public class ${NAME}ServiceImpl implements ${NAME}Service{
+private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}ServiceImpl.class);
+
+    @Autowired
+    private  ${NAME}Repository ${NAME.toLowerCase()}Repository;
+     @Override
+     public ${NAME} create${NAME}(${NAME}DTO ${NAME.toLowerCase()}DTO) {
+        ${NAME} ${NAME.toLowerCase()}= new ${NAME}();
+        ${NAME} new${NAME}=${NAME.toLowerCase()}.dtoToEntity(${NAME.toLowerCase()}DTO);
+        LOGGER.info("${NAME} created");
+        return ${NAME.toLowerCase()}Repository.save(new${NAME});
+    }
+    
+    @Override
+    public ${NAME} update${NAME}(Long id, ${NAME}DTO ${NAME.toLowerCase()}DTO) {
+        ${NAME}  existing${NAME}  = get${NAME}ById(id);
+              ${NAME} updated${NAME}=existing${NAME}.dtoToEntity(${NAME.toLowerCase()}DTO);
+         LOGGER.info("${NAME} updated");
+        return ${NAME.toLowerCase()}Repository.save(updated${NAME});
+    }
+    
+     @Override
+    public ${NAME} get${NAME}ById(Long id) {
+    LOGGER.info("get${NAME}Id:"+ id);
+        return ${NAME.toLowerCase()}Repository.findById(id).orElseThrow(()->new RuntimeException("${NAME} not found"));
+    }
+     @Override
+    public List<${NAME}> getAll${NAME}s() {
+    LOGGER.info("getAll ${NAME}s");
+        return ${NAME.toLowerCase()}Repository.findAll();
+    }
+    
+     @Override
+    public Page<${NAME}> getAll${NAME}s(Pageable pageable) {
+    LOGGER.info("getAll Pageable ${NAME}s");
+        return ${NAME.toLowerCase()}Repository.findAll(pageable);
+    }
+     @Override
+    public void delete${NAME}(Long id) {
+    ${NAME} ${NAME.toLowerCase()} = get${NAME}ById(id);
+    LOGGER.info("delete ${NAME} Id"+id);
+    ${NAME.toLowerCase()}Repository.delete(${NAME.toLowerCase()});
+    }
+    
+      @Override
+    public void deleteAll${NAME}s() {
+    LOGGER.info("delete ${NAME}s");
+        ${NAME.toLowerCase()}Repository.deleteAll();
+    }
 }
 ```
 ##### Controller
