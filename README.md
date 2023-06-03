@@ -4,7 +4,7 @@ IntellijIdea provides two type of templates \
 2)File and Code templates\
 we can create our own templates
 ## CodeFountain Templates
-You can import LiveTemplates by File -> Manage IDE Settings -> Import Settings -> Select **codefountainintellijideatemplets.zip**
+You can import LiveTemplates by File -> Manage IDE Settings -> Import Settings -> Select **settings.zip**
 ### Live Templates
 #### Java
 ##### logger template
@@ -26,13 +26,23 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```ruby
+```java
 spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$
 spring.datasource.username=$USERNAME$
 spring.datasource.password=$PASSWORD$
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 spring.jpa.hibernate.ddl-auto=update 
+
+```
+##### togglz
+
+```java
+togglz.features.$FEATURE_NAME$.enabled=true
+togglz.console.enabled=true
+togglz.console.path=/togglz-console
+togglz.console.secured=false
+togglz.console.use-management-port=false
 
 ```
 
@@ -357,6 +367,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import java.util.Optional;
 import ${PACKAGE_NAME}.entities.${NAME};
 import ${PACKAGE_NAME}.dto.${NAME}DTO;
 import ${PACKAGE_NAME}.services.${NAME}Service;
@@ -371,7 +382,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}ServiceImpl.
      @Override
      public ${NAME} create${NAME}(${NAME}DTO ${NAME.toLowerCase()}DTO) {
         ${NAME} ${NAME.toLowerCase()}= new ${NAME}();
-        ${NAME} new${NAME}=${NAME.toLowerCase()}.dtoToEntity(${NAME.toLowerCase()}DTO);
+       ${NAME} new${NAME}= ${NAME.toLowerCase()}.dtoToEntity(${NAME.toLowerCase()}DTO);
         LOGGER.info("${NAME} created");
         return ${NAME.toLowerCase()}Repository.save(new${NAME});
     }
@@ -386,8 +397,16 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}ServiceImpl.
     
      @Override
     public ${NAME} get${NAME}ById(Long id) {
-    LOGGER.info("get${NAME}Id:"+ id);
-        return ${NAME.toLowerCase()}Repository.findById(id).orElseThrow(()->new RuntimeException("${NAME} not found"));
+        LOGGER.info("getEmployeeId:" + id);
+        Optional<${NAME}> ${NAME.toLowerCase()}= ${NAME.toLowerCase()}Repository.findById(id);
+        if(${NAME.toLowerCase()}.isPresent()){
+            return ${NAME.toLowerCase()}.get();
+
+        }
+            else{
+             LOGGER.info("${NAME} doesn't exist");
+            return null;
+        }
     }
      @Override
     public List<${NAME}> getAll${NAME}s() {
@@ -413,19 +432,27 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}ServiceImpl.
         ${NAME.toLowerCase()}Repository.deleteAll();
     }
 }
+
 ```
 ##### Controller
 ```java
-#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
-import org.springframework.data.domain.Page;
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#endimport org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import ${PACKAGE_NAME}.services.${NAME}Service;
 import ${PACKAGE_NAME}.dto.${NAME}DTO;
@@ -458,9 +485,16 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}Controller.c
     @GetMapping("/get${NAME}/{id}")
     public ResponseEntity<${NAME}> get${NAME}ById(@PathVariable Long id) {
         ${NAME} ${NAME.toLowerCase()} = ${NAME.toLowerCase()}Service.get${NAME}ById(id);
-    LOGGER.info("get${NAME}Id:"+ id);
-        return ResponseEntity.ok(${NAME.toLowerCase()});
+        if(${NAME.toLowerCase()}!=null) {
+            LOGGER.info("get${NAME}Id:" + id);
+            return ResponseEntity.ok(${NAME.toLowerCase()});
+        }
+        else{
+            return ResponseEntity.notFound().build();
+
+        }
     }
+  
      @GetMapping("/getAll${NAME}s/pageable")
     public ResponseEntity<Page<${NAME}>> getAll${NAME}s(
             @RequestParam(defaultValue = "0") int page,
@@ -485,4 +519,5 @@ private static final Logger LOGGER = LoggerFactory.getLogger(${NAME}Controller.c
         return ResponseEntity.noContent().build();
     }
 }
+
 ```
