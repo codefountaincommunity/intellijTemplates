@@ -26,7 +26,7 @@ click on editvariable for NAME , USERNAME,PASSWORD expression field select **com
 below template text select **define** select **properties file**
 
 
-```java
+```ruby
 spring.datasource.url=jdbc:mysql://localhost:3306/$NAME$
 spring.datasource.username=$USERNAME$
 spring.datasource.password=$PASSWORD$
@@ -37,7 +37,7 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 ##### togglz
 
-```java
+```ruby
 togglz.features.$FEATURE_NAME$.enabled=true
 togglz.console.enabled=true
 togglz.console.path=/togglz-console
